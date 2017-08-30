@@ -1,0 +1,12 @@
+schema在用户第一次创建数据对象的时候创建，与用户同名。
+schema用户存放用户创建的数据对象，schema之间存在隐私。
+如果想要跨schema访问数据对象，需要权限。
+如：
+xiaohong想访问xiaoming的user表。
+要登录xiaoming执行grant select on user to xiaohong;即可（增删改查权限【select/insert/delete/update/all】）
+再登录xiaohong就可以查看xiaoming的user表了，使用xiaoming.user即可。
+
+如果xiaohong想把权限再转移给xiaogang，那么xiaoming在给xiaohong授权的时候需要加上with grant option;
+
+with grant option;针对的是对象权限。
+with admin option;针对的是系统权限。

@@ -1,0 +1,45 @@
+profile是口令限制，资源限制的命令集合。
+建立数据库时，oracle会自动建立名为default的profile，
+当建立用户没有指定profile选项，那么oracle会将default分配给用户。
+===========================================================
+需求：指定xiaohong这个用户最多只能尝试登陆3次，锁定时间为2天。
+
+1:登陆SYS
+2:创建profile：
+	CREATE PROFILE myprofile1 LIMIT FAILED_LOGIN_ATTEMPTS 3 PASSWORD_LOCK_TIME 2;
+3:将profile分配给用户
+	ALTER USER xiaohong PROFILE myprofile1;
+
+===========================================================
+
+解锁用户
+ALTER USER xiaohong ACCOUNT UNLOCK;
+
+===========================================================
+终止口令
+
+需求：一个账号密码，最多用10天，宽限期限为2天，到时候必须设置新的密码
+
+1：登录SYS
+2：创建profile：
+	CREATE PROFILE myprofile2 LIMIT PASSWORD_LIFE_TIME 10 PASSWORD_GRACE_TIME 2;
+3：将profile分配给用户
+	ALTER USER xiaohong PROFILE myprofile2;
+
+===========================================================
+口令历史
+需求：在终止口令需求的基础上，希望用户修改密码的时候不能使用用过的密码。
+需要使用口令历史，这样oracle就会将口令修改的信息存放在数据字典中，这样当修改密码的时候，
+oracle会对新旧密码进行比较，如果发现新旧密码一样，就会提示用户重新输入密码。
+
+1：登录SYS
+2：创建profile：
+	CREATE PROFILE myprofile3 LIMIT PASSWORD_LIFE_TIME 10 PASSWORD_GRACE_TIME 2 PASSWORD_REUSE_TIME 1;
+3：分配给用户：
+	ALTER USER xiaohong PROFILE myprofile3;
+
+===========================================================
+删除profile
+DROP PROFILE profile文件
+===========================================================
+profile会覆盖。
