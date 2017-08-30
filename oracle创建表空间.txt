@@ -1,0 +1,21 @@
+CREATE TABLESPACE 表空间名称
+DATAFILE '表空间路径'
+SIZE 表空间大小m
+AUTOEXTEND ON;
+
+例如
+create tablespace testspace
+datafile '/data/testspace.dbf'
+size 50m
+autoextend on;
+
+===============================
+创建临时表空间
+CREATE TEMPORARY TABLESPACE 临时表空间名称
+TEMPFILE '临时表空间路径'
+SIZE 表空间大小m
+AUTOEXTEND ON;
+
+
+===============================
+ps：两个用户公用一个表空间，但是他们在表空间创建的表是私有的，对方不可见的。

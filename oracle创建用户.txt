@@ -1,0 +1,21 @@
+CREATE USER 用户名 IDENTIFIED BY 密码   ---到这里可以简单的创建一个用户。
+DEFAULT TABLESPACE 表空间名称
+TEMPORARY TABLESPACE 临时表空间名称
+QUOTA 大小 ON USERS;
+
+=========================================
+给用户授权、角色
+GRANT 权限/角色 TO 用户名;
+
+收回权限、角色
+REVOKE 权限/角色 FROM 用户名；
+
+grant create session to xiaohong; ---------可以使用xiaohong连接数据库了。
+revoke create session to xiaohong; ---------xiaohong不能连接数据库了。
+
+grant connect to xiaohong; ------将connect角色赋予xiaohong
+grant resource to xiaohong; ------将资源角色赋予xiaohong
+
+========================================
+删除角色
+drop user 用户名 [CASCADE];
