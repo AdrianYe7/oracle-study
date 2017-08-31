@@ -1,0 +1,10 @@
+一.The listener supports no services
+在linux上启动监听器但是会在倒数第二行看到上面这段话。
+解决的办法：
+  1.sqlplus登上数据库。sqlplus /nolog;
+  2.登录sys用户。conn / as sysdba;
+  3.注册服务到监听器。 alter system register;
+或者在
+  oracle/product/11.2.0/db_1/network/admin下的listener.ora文件中加入一段话：
+    SID_LIST_LISTENER =  (SID_LIST =    (SID_DESC =    (GLOBAL_DBNAME = globe)  (SID_NAME = globe)  ))
+  其中globe替换称自己的实例名。
